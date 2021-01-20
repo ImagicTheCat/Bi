@@ -1,0 +1,19 @@
+= Bi programming language
+
+*Bi*, or *Bismuth*, is a programming language in development. 
+
+The name comes from the chemical element; its magnificent oxidized crystals are iridescent and can symbolize the diversity, range or spectrum of features in the language. They also have a stair step structure; entangled, nested squares that can symbolize the aimed levels of abstraction.
+
+
+.Principles / Goals 
+- It must be simple, keeping only what is essential.
+- It must be coherent.
+- It must be easy to read and understand, before being easy to write. The reasoning is that we spend much more time reading and thinking about code than writing it.
+- It must give high levels of abstraction while giving access all the way down to the lowest level, as nicely as possible.
+** Hybrid static/dynamic typing.
+** Hybrid manual/automatic memory management (__sparse__ garbage collection ?).
+** Interoperability with low-level languages like C.
+** General static/dynamic hybrid: it could be AOT compiled (e.g. binary modules), interpreted and JIT compiled.
+- It should be frozen once out of development state, completely or with very infrequent releases. This aims to prevent old code breakage or backwards compatibility induced inconsistencies. The reasoning is that it is better to have a working, consistent and well designed language, eventually extended by third-party code, than implementing new and fancy features at the cost of the rest. At some point, if the language is not interesting anymore because of the lack of change, another one will take its place and this is fine; at least there will be no ambiguity about the language.
+
+NOTE: This is a long term project not bound to any deadline or expectations. It may never be done.
