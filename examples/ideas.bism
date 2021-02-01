@@ -1,0 +1,19 @@
+ref vec2 = structC[[float x,y;]]
+ref op = G.op and op
+define op("add")(vec2 a, vec2 b)
+end
+
+ref tuple = struct{i8, string, f32}
+
+ref Gem = struct{
+  name = string,
+  power = f32
+}
+ref Staff = struct{Gem&}
+
+ref staff = Staff{Gem{name = "Orb", power = 10}}
+
+ref staff_use = function() end
+define staff_use(Staff& self, i16 a, b, i16 c)
+end
+staff_use(staff)

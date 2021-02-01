@@ -13,7 +13,14 @@ The name comes from the chemical element; its magnificent oxidized crystals are 
 ** Hybrid static/dynamic typing.
 ** Hybrid manual/automatic memory management (__sparse__ garbage collection ?).
 ** Interoperability with low-level languages like C.
-** General static/dynamic hybrid: it could be AOT compiled (e.g. binary modules), interpreted and JIT compiled.
+** Interpreted and JIT compiled.
 - It should be frozen once out of development state, completely or with very infrequent releases. This aims to prevent old code breakage or backwards compatibility induced inconsistencies. The reasoning is that it is better to have a working, consistent and well designed language, eventually extended by third-party code, than implementing new and fancy features at the cost of the rest. At some point, if the language is not interesting anymore because of the lack of change, another one will take its place and this is fine; at least there will be no ambiguity about the language.
 
 NOTE: This is a long term project not bound to any deadline or expectations. It may never be done.
+
+.Ideas
+- Two ways Bi / C FFI.
+** Avoid the need of a complete C API as for Lua.
+** Prevent inconsistencies between Bi and C side features.
+- Types are first-class values resolved at function compilation.
+- Global function environment assignment should be explicit.
