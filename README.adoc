@@ -22,5 +22,10 @@ NOTE: This is a long term project not bound to any deadline or expectations. It 
 - Two ways Bi / C FFI.
 ** Avoid the need of a complete C API as for Lua.
 ** Prevent inconsistencies between Bi and C side features.
-- Types are first-class values resolved at function compilation.
+- Functions are "multifunctions", they have definitions for specific signatures.
+- Types are first-class values.
 - Global function environment assignment should be explicit.
+- Variables: scoped values or scoped / unscoped references.
+- Values: scoped / unscoped.
+- Global methods (applied on any type) as multifunctions (induced inheritance).
+- Operators as multifunctions.
