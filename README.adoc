@@ -4,6 +4,11 @@
 
 The name comes from the chemical element; its magnificent oxidized crystals are iridescent and can symbolize the diversity, range or spectrum of features in the language. They also have a stair step structure; entangled, nested squares that can symbolize the aimed levels of abstraction.
 
+.This repository aims to contain:
+- The language specification.
+- A Lua(JIT) implementation; The Lua language is a major inspiration for *Bi*, thus making a transpiler and VM should be relatively straightforward and will allow to quickly experiment and develop the language.
+- A *C* low-level state-of-the-art interpreter and JIT compiler for the language. A major endeavor that requires very advanced skills; a long term goal.
+
 
 .Principles / Goals 
 - It must be simple, keeping only what is essential.
