@@ -9,7 +9,7 @@ The name comes from the chemical element; its magnificent oxidized crystals are 
 .This repository aims to contain:
 - The language specification.
 - A Lua(JIT) implementation; The Lua language is a major inspiration for *Bi*, thus making a transpiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
-- A <<progressive-compilation, progressive>> compiler for the language. A major endeavor that requires very advanced skills; a long term goal.
+- A <<runtime-compilation, runtime>> compiler for the language. A major endeavor that requires very advanced skills; a long term goal.
 
 
 .Principles / Goals 
@@ -21,8 +21,8 @@ The name comes from the chemical element; its magnificent oxidized crystals are 
 ** Hybrid manual/automatic memory management (__sparse__ garbage collection ?).
 ** Interoperability with low-level languages like C.
 ** Self meta-programming language (given by dynamic runtime compilation).
-** Progressively compiled (see <<Progressive Compilation>>).
-- It should be backwards compatible with infrequent changes.
+** Compiled at runtime (see <<Runtime compilation>>).
+- It must be backwards compatible with infrequent changes.
 +
 NOTE: This aims to prevent old code breakage or backwards compatibility induced inconsistencies. The reasoning is that it is better to have a working, consistent and well designed language, eventually extended by third-party code, than implementing new and fancy features at the cost of the rest. At some point, if the language is not interesting anymore because of the lack of change, another one will take its place and this is fine; at least there will be no ambiguity about the language.
 
@@ -36,21 +36,21 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Global methods (applied on any type) as multifunctions (induced inheritance).
 - Operators as multifunctions.
 
-[#progressive-compilation]
-== Progressive Compilation
+[#runtime-compilation]
+== Runtime compilation
 
 The idea is to push further the concept of JIT compilation.
 
 High-level languages tend to be dynamic; we can think of dynamicity as a superset of staticity, which allows for higher abstractions. Contrary to JIT compilation, AOT compilation doesn't have access to runtime data, it can only guess how those dynamic elements will behave. However, JIT compilation has high timing constraints limiting its potential.
 
-Progressive compilation would be about compiling code at runtime and storing the result into a persisting cache, between invocations. A mix between AOT and JIT compilation.
+For example, _progressive compilation_ would be about compiling code at runtime and storing the result into a persisting cache, between invocations. A mix between AOT and JIT compilation.
 
 This means that the program may improve over time, tuned for a specific user on a specific platform. It would also be possible to distribute a pre-computed cache to avoid warm up time, or to target platforms where binaries are signed and runtime compilation is forbidden.
 
 === Source code is what matters
 
-We should distribute source first, not binaries. Pre-compiled languages struggle by decoupling the source from the target machine, obfuscating the high level semantics of programs to the users and _to the machine or platform_. E.g. a program could dynamically search for a resource on the target system; a machine instruction, an operating system, a library, etc. This should not be done ahead-of-time, forcing users and developers to pre-determine what will be available, resulting in build and distribution complexity.
+We should distribute source first, not binaries. Pre-compiled languages struggle by decoupling the source from the target machine, obfuscating the high level semantics of programs from the users. E.g. a program could dynamically search for a resource on the target system; a machine instruction, an operating system, a library, etc. This should not be done ahead-of-time, forcing users and developers to pre-determine what will be available, resulting in build and distribution complexity.
 
 Sharing code must be simple. The code should work, even if not optimal; there is no point in optimizing something that doesn't work. Compiling everything ahead-of-time, as most things are probably not required, is inefficient.
 
-Performances should not prevent good abstractions. Runtime compilation gives the opportunity to develop efficient abstractions beyond what pre-compiled languages can do. As an example, it seems that most meta-programming comes to having code generating code; there is an executed layer. With runtime compilation, there is no distinction between compile-time and runtime, the language is a meta-programming language for itself.
+Performances should not prevent good abstractions. Runtime compilation gives the opportunity to develop efficient abstractions beyond what pre-compiled languages can do. As an example, it seems that most meta-programming comes down to having code generating code; there is an executed layer. With runtime compilation, there is no distinction between compile-time and runtime, the language is a meta-programming language for itself.
