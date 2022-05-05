@@ -30,11 +30,14 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 .Ideas
 - Functions are "multifunctions", they have definitions for specific signatures.
 - Types are first-class values.
+- Type inheritance, not structure/data inheritance.
 - Global function environment assignment should be explicit.
-- Variables: scoped values or scoped / unscoped references.
-- Values: scoped / unscoped.
-- Global methods (applied on any type) as multifunctions (induced inheritance).
+- Variables: scoped values/objects or scoped/unscoped references.
+- Values/objects: scoped/unscoped.
+- Values are immutable, objects are mutable.
 - Operators as multifunctions.
+- Global methods (applied on any type) as operators/operations (induced inheritance).
+- Sane scoping for sandboxing.
 
 [#runtime-compilation]
 == Runtime compilation

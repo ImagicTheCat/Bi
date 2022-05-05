@@ -1,19 +1,54 @@
-ref vec2 = structC[[float x,y;]]
-ref op = G.op and op
-define op("add")(vec2 a, vec2 b)
-end
+-- Multifunction
 
-ref tuple = struct{i8, string, f32}
+var f = function(x) return x*x end
+-- or
+function g(x) return 1/x end -- local
+define g(x, y) return x/y end
+-- or
+var h = function({op = {}}) -- constructor
 
-ref Gem = struct{
+-- Table
+
+var list = {1,2,3}
+var map = {one = 1, two = 2, ["three"] = 3}
+
+-- Environment
+
+assert(op == ENV.op)
+
+-- C FFI
+
+var vec2 = structC[[float x,y;]]
+
+-- Structure
+
+var tuple = struct{i8, string, f32}
+
+var Person = struct{
   name = string,
-  power = f32
+  age = number
 }
-ref Staff = struct{Gem&}
 
-ref staff = Staff{Gem{name = "Orb", power = 10}}
+-- Operators / Operations
 
-ref staff_use = function() end
-define staff_use(Staff& self, i16 a, b, i16 c)
+define op.add(a: vec2, b: vec2) return vec2{a.x+b.x, a.y+b.y} end
+define op.grow(self : Person) self.age = self.age + 1 end
+
+var pos = vec2{1,0} + vec2{0,1}
+
+var person = Person{name = "John Smith", age = 42}
+person:grow()
+var name:string, age:number = person.name, person.age
+
+-- Error handling
+
+do
+  var err = pcall(function() throw(number_error()) end)
+  if not type.is(err, number_error) then throw(err) end -- propagate
 end
-staff_use(staff)
+
+-- async / await
+
+async(function() await(delay(5)) end)
+
+-- Scoped values
