@@ -35,9 +35,11 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Variables: scoped values/objects or scoped/unscoped references.
 - Values/objects: scoped/unscoped.
 - Values are immutable, objects are mutable.
+- Strong, weak, rooted references ?
 - Operators as multifunctions.
 - Global methods (applied on any type) as operators/operations (induced inheritance).
 - Sane scoping for sandboxing.
+- Parallelism as a first class concept: multi-threading agnostic, etc ?
 
 [#runtime-compilation]
 == Runtime compilation
