@@ -47,8 +47,9 @@ do
   if not type.is(err, number_error) then throw(err) end -- propagate
 end
 
--- async / await
+-- Async (detached) call
 
-async(function() await(delay(5)) end)
+var task = async(my_func)
+var r = task:wait()
 
 -- Scoped values

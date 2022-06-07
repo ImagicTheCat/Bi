@@ -39,7 +39,7 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Operators as multifunctions.
 - Global methods (applied on any type) as operators/operations (induced inheritance).
 - Sane scoping for sandboxing.
-- Parallelism as a first class concept: multi-threading agnostic, etc ?
+- Parallelism as a first class concept: async (detached) call, main is yieldable (no asymmetry), multi-threading agnostic ?
 
 [#runtime-compilation]
 == Runtime compilation
