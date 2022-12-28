@@ -8,7 +8,7 @@ The name comes from the chemical element; its magnificent oxidized crystals are 
 
 .This repository aims to contain:
 - The language specification.
-- A Lua(JIT) implementation; The Lua language is a major inspiration for *Bi*, thus making a transpiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
+- A Lua(JIT) implementation; The Lua language is a major inspiration for *Bi*, thus making a compiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
 - A <<runtime-compilation, runtime>> compiler for the language. A major endeavor that requires very advanced skills; a long term goal.
 
 
@@ -39,6 +39,8 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Global methods (applied on any type) as operators/operations (induced inheritance).
 - Sane scoping for sandboxing.
 - Parallelism as a first class concept: async (detached) call, main is yieldable (no asymmetry), multi-threading agnostic ?
+- Foundational concepts: Operations, Structures and Categories ?
+- Make the interpreter and runtime compiler in the language itself: generation for a specific target language from the source language.
 
 [#runtime-compilation]
 == Runtime compilation
