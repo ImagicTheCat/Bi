@@ -43,6 +43,8 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Make the interpreter and runtime compiler in the language itself: generation for a specific target language from the source language.
 - Look at dynamic features as runtime execution and static features as ahead of time execution.
 - Static and **dynamic** analysis (e.g. AOT compilation from runtime profiling). Hybrid static and dynamic language.
+- Scope management: defer, errdefer.
+- Relaxed defaults and ability to progressively add constraints.
 
 [#runtime-compilation]
 == Runtime compilation
