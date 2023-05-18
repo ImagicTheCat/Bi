@@ -45,6 +45,9 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Static and **dynamic** analysis (e.g. AOT compilation from runtime profiling). Hybrid static and dynamic language.
 - Scope management: defer, errdefer.
 - Relaxed defaults and ability to progressively add constraints.
+- Scoped operator definitions, change behavior of objects for specific scopes.
+- Functions take a value/object from an expression instead of a list of arguments. A list of arguments is a kind of value.
+- Fundamental axis: parallelism, scoping or contextualization, freedom/constraints, static/dynamic.
 
 [#runtime-compilation]
 == Runtime compilation
