@@ -53,3 +53,14 @@ var task = async(my_func)
 var r = task:wait()
 
 -- Scoped values
+
+-- Constraints / checks
+
+const a = 5
+int:check(a)
+check(a, int)
+check(a, less_than(10))
+
+const a: (int + float, less_than(10)), b: int = 5, 5
+const t = int + float
+const a:t, b:t = 5, 5.1
