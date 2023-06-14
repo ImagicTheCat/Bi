@@ -8,29 +8,31 @@ The name comes from the chemical element; its magnificent oxidized crystals are 
 
 .This repository aims to contain:
 - The language specification.
-- A Lua(JIT) and C implementation (runtime, compiler, etc.); The Lua language is a major inspiration for *Bi*, thus making a compiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
+- A Lua(JIT) and C implementation (runtime, compiler, target, etc.); The Lua language is a major inspiration for *Bi*, thus making a compiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
 
 .Principles / Goals 
 - It must be simple, keeping only what is essential.
 - It must be coherent.
 - It must be easy to read and understand, before being easy to write. The reasoning is that we spend much more time reading and thinking about code than writing it.
-- It must be powerful. I.e. give freedom to the developers even if they can do terrible things with it.
+- It must be powerful. E.g. give freedom to the developers even if they can do terrible things with it.
 - It must have a pragmatic approach to safety and correctness: more is better, unless it impacts the other principles.
 - It must not seek conformism and hinder creativity (even for the sake of wider adoption and interoperability).
-- It must not aim to be popular or to have an official organization.
+- It doesn't aim to be popular or to have an official organization.
 - It must be modular "without" a standard library.
 - It must give high levels of abstraction while giving access all the way down to the lowest level, as nicely as possible.
 ** Self meta-programming language.
 ** Hybrid manual/automatic memory management.
 ** Excellent interoperability with C.
-- It must have staticity and dynamicity as first class concepts, i.e. not considered a dynamic or static language, but an hybrid.
-- It should have concurrency, parallelism and asynchrony as first class concepts. It's not (just) about better exploitation of the resources of modern computing, it's about being able to nicely express parallelism when needed (computation, disk I/O, networking, user input, AI threads, etc.).
-- It must put the emphasis on source code instead of other representations (AST, binaries, etc.).
+- It must have first class support for both staticity and dynamicity. I.e. not considered a dynamic or static language, but an hybrid.
+- It should have first class support for concurrency, parallelism and asynchrony. It's not (just) about better exploitation of the resources of modern computing, it's about being able to nicely express parallelism when needed (computation, disk I/O, networking, user input, AI threads, etc.).
+- It should put the emphasis on source code instead of other representations (AST, binaries, etc.).
 - It should have tools to perform static (e.g. checking, extracting semantic) and dynamic (e.g. checking, profiling) analysis.
-- It must not encourage irrelevant optimizations. Abstractions may have a cost which should be paid gladly (as written above, with the aimed ability to nicely bypass them by going to lower levels when needed).
+- It must not encourage irrelevant optimizations. Abstractions may have a cost which can be gladly paid (as written above, with the aimed ability to nicely bypass them by going to lower levels when needed).
 - It must be backwards compatible with infrequent changes.
 +
 NOTE: This aims to prevent old code breakage or backwards compatibility induced inconsistencies. The reasoning is that it is better to have a working, consistent and well designed language, eventually extended by third-party code, than implementing new and fancy features at the cost of the rest. At some point, if the language is not interesting anymore because of the lack of change, another one will take its place and this is fine; at least there will be no ambiguity about the language.
+
+The language aims to be general purpose, but it is effectively developed to achieve specific projects and so will be biased towards that. In this case, it is designed with game development in mind. This can imply an emphasis on performance, lesser interest for correctness, a need for quick prototyping, flexibility, gluing stuff together, runtime modifications, sandboxing, embeddability, etc.
 
 .Ideas
 - Functions are "multifunctions", they have definitions for specific signatures.
