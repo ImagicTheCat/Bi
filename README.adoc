@@ -8,23 +8,29 @@ The name comes from the chemical element; its magnificent oxidized crystals are 
 
 .This repository aims to contain:
 - The language specification.
-- A Lua(JIT) implementation; The Lua language is a major inspiration for *Bi*, thus making a compiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
-- A <<runtime-compilation, runtime>> compiler for the language. A major endeavor that requires very advanced skills; a long term goal.
-
+- A Lua(JIT) and C implementation (runtime, compiler, etc.); The Lua language is a major inspiration for *Bi*, thus making a compiler and VM should be relatively straightforward and will allow to quickly develop and experiment with the language.
 
 .Principles / Goals 
 - It must be simple, keeping only what is essential.
 - It must be coherent.
 - It must be easy to read and understand, before being easy to write. The reasoning is that we spend much more time reading and thinking about code than writing it.
+- It must be powerful. I.e. give freedom to the developers even if they can do terrible things with it.
+- It must have a pragmatic approach to safety and correctness: more is better, unless it impacts the other principles.
+- It must not seek conformism and hinder creativity (even for the sake of wider adoption and interoperability).
+- It must not aim to be popular or to have an official organization.
+- It must be modular "without" a standard library.
 - It must give high levels of abstraction while giving access all the way down to the lowest level, as nicely as possible.
-** Hybrid static/dynamic typing.
-** Hybrid manual/automatic memory management (__sparse__ garbage collection ?).
-** Interoperability with low-level languages like C.
-** Self meta-programming language (given by dynamic <<Runtime compilation>>).
+** Self meta-programming language.
+** Hybrid manual/automatic memory management.
+** Excellent interoperability with C.
+- It must have staticity and dynamicity as first class concepts, i.e. not considered a dynamic or static language, but an hybrid.
+- It should have concurrency, parallelism and asynchrony as first class concepts. It's not (just) about better exploitation of the resources of modern computing, it's about being able to nicely express parallelism when needed (computation, disk I/O, networking, user input, AI threads, etc.).
+- It must put the emphasis on source code instead of other representations (AST, binaries, etc.).
+- It should have tools to perform static (e.g. checking, extracting semantic) and dynamic (e.g. checking, profiling) analysis.
+- It must not encourage irrelevant optimizations. Abstractions may have a cost which should be paid gladly (as written above, with the aimed ability to nicely bypass them by going to lower levels when needed).
 - It must be backwards compatible with infrequent changes.
 +
 NOTE: This aims to prevent old code breakage or backwards compatibility induced inconsistencies. The reasoning is that it is better to have a working, consistent and well designed language, eventually extended by third-party code, than implementing new and fancy features at the cost of the rest. At some point, if the language is not interesting anymore because of the lack of change, another one will take its place and this is fine; at least there will be no ambiguity about the language.
-
 
 .Ideas
 - Functions are "multifunctions", they have definitions for specific signatures.
@@ -48,36 +54,3 @@ NOTE: This aims to prevent old code breakage or backwards compatibility induced 
 - Scoped operator definitions, change behavior of objects for specific scopes.
 - Functions take a value/object from an expression instead of a list of arguments. A list of arguments is a kind of value.
 - Fundamental axis: parallelism, scoping or contextualization, freedom/constraints, static/dynamic.
-
-[#runtime-compilation]
-== Runtime compilation
-
-NOTE: In the following section, *compilation* refers mainly to the production of machine code, the lowest software level. It may also be quite opinionated until refined as principles.
-
-The idea is to push further the concept of JIT compilation.
-
-High-level languages tend to be dynamic; we can think of dynamicity as a superset of staticity, which allows for higher abstractions. Contrary to JIT compilation, AOT compilation doesn't have access to runtime data, it can only guess how those dynamic elements will behave. However, JIT compilation has high timing constraints limiting its potential.
-
-For example, _progressive compilation_ may be about compiling code at runtime and storing the result into a persisting cache, between invocations. A mix between AOT and JIT compilation.
-
-This means that the program may improve over time, tuned for a specific user on a specific platform. It would also be possible to distribute a pre-computed cache to avoid warm up time, or to target platforms where binaries are signed and runtime compilation is forbidden.
-
-=== Source code is what matters
-
-We should distribute source first, not binaries. Pre-compiled languages struggle by decoupling the source from the target machine, obfuscating the high level semantics of programs from the users.
-
-A program could dynamically search for a resource on the target system; a machine instruction, an operating system, a library, etc. This should not be done ahead-of-time, forcing users and developers to pre-determine what will be available, resulting in build and distribution complexity.
-
-Sharing code must be simple. The code should work, even if not optimal; there is no point in optimizing something that doesn't work. Compiling everything ahead-of-time, as most things may not be used, is probably inefficient.
-
-=== Performances should not prevent good abstractions
-
-Runtime compilation gives the opportunity to develop efficient abstractions beyond what _pre-compiled_ languages can do.
-
-As an example, it seems that most meta-programming comes down to having code generating code; i.e. there is an executed layer. With runtime compilation, there is no distinction between compile-time and runtime, the language can be a meta-programming language for itself.
-
-Furthermore, _pre-compiled_ languages probably get away with AOT compilation by the lack of high dynamic abstractions from their semantics; trying to compile (AOT) an higher level language can quickly reveal itself ineffective.
-
-We may think that building a JIT compiler is complicated, but we may also forget that building an AOT compiler is not simple either. It is easy to think that the C language is efficient, whereas that is a property of its implementations; and so much work has been poured into them, e.g. GCC and Clang. In comparison, a JIT compiler like LuaJIT with less resources (human or compute) can produce great results with higher (dynamic) abstractions.
-
-Machine code is necessary to bootstrap the runtime, but beyond that it seems that runtime compilation is the right approach to develop a simple *and* powerful language.
