@@ -56,3 +56,7 @@ The language aims to be general purpose, but it is effectively developed to achi
 - Scoped operator definitions, change behavior of objects for specific scopes.
 - Functions take a value/object from an expression instead of a list of arguments. A list of arguments is a kind of value.
 - Fundamental axis: parallelism, scoping or contextualization, freedom/constraints, static/dynamic.
+- Static typing relative to the function, the unit of compilation. It is dynamic
+  compilation and type generation relative to the project, but static relative
+  to the body of a specific function. Type expressions are evaluated at the
+  compilation of the function, with a similar feel as lexical scoping.
